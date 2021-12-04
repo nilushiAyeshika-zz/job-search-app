@@ -1,6 +1,6 @@
 export interface ISearchProps {
   className?: string
-  onSubmitSuccess: () => any
+  onSubmitSuccess?: () => any
 }
 
 export interface ISearchFormValues {

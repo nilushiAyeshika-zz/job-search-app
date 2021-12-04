@@ -11,6 +11,7 @@ import Search from '../../../components/job/search/Search.component'
 import Header from '../../../components/shared/header/Header.component'
 import { IJob } from './SearchJob.types'
 import { clearResults } from '../../../features/jobs/JobsAction'
+import JobListLoader from '../../../components/shared/contentLoaders/jobListLoader/JobListLoader.component'
 
 import SearchJobWrapper from './SearchJob.theme'
 
@@ -18,10 +19,7 @@ const SearchJobScreen: FC = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { jobList, isLoading } = useSelector((state: any) => state.jobs)
-
-  const handleSuccess = useCallback(() => {
-    // console.log('search success')
-  }, [])
+  const placeholderItemsCount = 2;
 
   const handleJobDescription = useCallback((value) => {
     navigate(`job/${value}`)
@@ -34,8 +32,11 @@ const SearchJobScreen: FC = () => {
   console.log('jobList',jobList)
 
   const renderLoading = () => (
-    <Grid margin="12rem 0 2rem 0" justifyContent="center">
-      <Text size="xxl">Your results will appear here....</Text>
+    <Grid margin="5rem 0 2rem 0" alignItems="center" direction="column">
+      <Text size="xxl" margin="0 0 5rem 0">Your results will appear here....</Text>
+      {Array.from(Array(placeholderItemsCount).keys()).map((index) => (
+        <JobListLoader key={index} />
+      ))}
     </Grid>
   )
 
@@ -96,7 +97,7 @@ const SearchJobScreen: FC = () => {
         >
           Welcome to Dev Jobs
         </Text>
-        <Search onSubmitSuccess={handleSuccess} />
+        <Search />
         {jobList && <Text className="searchJob__clear" size="m" color="typo-white" onClick={handleClearResults}>Clear Search</Text>}
         {renderJobList()}
       </Grid>

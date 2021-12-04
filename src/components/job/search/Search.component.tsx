@@ -13,7 +13,7 @@ import { JobConstants } from '../../../constants/JobConstants'
 import { SearchWrapper } from './Search.theme'
 
 const Search: React.FC<ISearchProps> = (props) => {
-  const { className, onSubmitSuccess } = props
+  const { className } = props
 
   const dispatch = useDispatch()
   let pollingResults: any
@@ -28,7 +28,6 @@ const Search: React.FC<ISearchProps> = (props) => {
     dispatch(getJobs(values.queryString, values.location))
 
     setButtonDisabled(false)
-    onSubmitSuccess()
   }, [])
 
   const schema = Yup.object().shape(

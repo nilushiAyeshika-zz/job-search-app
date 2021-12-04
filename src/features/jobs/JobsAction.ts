@@ -5,6 +5,7 @@ import {
   GET_JOBS_SUCCESS,
   GET_JOBS_ERROR,
   CLEAR_SEARCH_RESULTS,
+  APPLY_TO_JOB,
   JobsDispatchTypes
 } from './JobsAction.types'
 
@@ -44,6 +45,18 @@ export const getJobs =
     try {
       dispatch({
         type: CLEAR_SEARCH_RESULTS,
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  export const applyToJob = 
+  (id: string) => async (dispatch: Dispatch<JobsDispatchTypes>) => {
+    try {
+      dispatch({
+        type: APPLY_TO_JOB,
+        payload: id,
       })
     } catch (e) {
       console.error(e)

@@ -7,4 +7,5 @@ export interface IJobsDefaultState {
     queryString: string
     location: string
   }
+  appliedJobs: string[]
 }
