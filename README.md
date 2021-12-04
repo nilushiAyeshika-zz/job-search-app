@@ -65,7 +65,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Launches the test coverage reports.
 
-### `yarn run linit`
+### `yarn run lint`
 
 Run the eslint and check the issues.
 
