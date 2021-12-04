@@ -23,13 +23,12 @@ Create .env file and add below lines into file
 REACT_APP_JOB_SERVICES=http://localhost:8080
 ```
 
-## Build
+## Running the project locally with Docker
 
 Run the following command to build and run the app service docker image
 
 ```
-docker build . -t jobsearch
-docker-compose up jobsearch.yml -d
+docker-compose -f jobsearch.yml up
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -37,10 +36,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 To stop the service and remove all relevant resources, run the following command
 
 ```
-docker-compose down
+docker-compose -f jobsearch.yml down
 ```
 
-## Available Scripts
+## Available scripts & running the project locally without Docker
 
 First you need to install dependencies using yarn
 

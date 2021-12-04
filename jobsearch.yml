@@ -2,8 +2,11 @@ version: '3.3'
 
 services:
   client:
-    container_name: jobsearch
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: jobsearch
+    container_name: jobsearch
     volumes:
       - ./src:/app/src
     ports:
