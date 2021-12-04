@@ -13,6 +13,7 @@ import { IJob } from './SearchJob.types'
 import { clearResults } from '../../../features/jobs/JobsAction'
 import JobListLoader from '../../../components/shared/contentLoaders/jobListLoader/JobListLoader.component'
 import { checkValueExits } from '../../../utils/CommonFunctions.utils'
+import { JobConstants } from '../../../constants/JobConstants'
 
 import SearchJobWrapper from './SearchJob.theme'
 
@@ -22,7 +23,7 @@ const SearchJobScreen: FC = () => {
   const { jobList, isLoading, appliedJobs, isPollingTimeOut } = useSelector(
     (state: any) => state.jobs
   )
-  const placeholderItemsCount = 2
+  const placeholderItemsCount = JobConstants.defaultPlaceholderCount
 
   const handleJobDescription = useCallback((value) => {
     navigate(`job/${value}`)
@@ -64,6 +65,7 @@ const SearchJobScreen: FC = () => {
     </Grid>
   )
 
+  // search results mapping with job card
   const renderSearchResults = () =>
     jobList.map((job: IJob) => {
       const isApplied = checkValueExits(job.Guid, appliedJobs)
@@ -83,6 +85,16 @@ const SearchJobScreen: FC = () => {
         />
       )
     })
+
+/**
+ * check the relevant states and return matching content
+ * loading state
+ * initial state
+ * search results display
+ * no results
+ * polling time out
+ * @returns relevant content
+ */
 
   const renderJobList = () => {
     if (isLoading) {

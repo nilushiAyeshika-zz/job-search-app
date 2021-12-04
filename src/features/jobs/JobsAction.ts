@@ -12,6 +12,7 @@ import {
 
 import JobsApi from '../../api/JobsApi'
 
+// action for get job list results
 export const getJobs =
   (query: string, location: string) => async (dispatch: Dispatch<JobsDispatchTypes>) => {
     try {
@@ -40,6 +41,8 @@ export const getJobs =
     }
   }
 
+
+// action for clear searched results
 export const clearResults = () => async (dispatch: Dispatch<JobsDispatchTypes>) => {
   try {
     dispatch({
@@ -50,6 +53,7 @@ export const clearResults = () => async (dispatch: Dispatch<JobsDispatchTypes>) 
   }
 }
 
+// action for apply to job
 export const applyToJob = (id: string) => async (dispatch: Dispatch<JobsDispatchTypes>) => {
   try {
     dispatch({
@@ -61,6 +65,7 @@ export const applyToJob = (id: string) => async (dispatch: Dispatch<JobsDispatch
   }
 }
 
+// action for polling time out
 export const pollingTimeOut = () => async (dispatch: Dispatch<JobsDispatchTypes>) => {
   try {
     dispatch({

@@ -35,6 +35,11 @@ const Search: React.FC<ISearchProps> = (props) => {
     queryString: Yup.string().trim().required('Query string is required'),
   })
 
+  /**
+   * Polling results for one minute
+   * after one minute it will give a timeout
+ */
+
   useEffect(() => {
     if (searchOptions.queryString !== '' || searchOptions.location !== '') {
       const startTime = new Date().getTime()
@@ -42,22 +47,12 @@ const Search: React.FC<ISearchProps> = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         pollingResults = setInterval(() => {
           if (new Date().getTime() - startTime > JobConstants.TimeoutWait) {
-            console.log('stop-polling-time-out')
             clearInterval(pollingResults)
             dispatch(pollingTimeOut())
           } else {
             dispatch(getJobs(searchOptions.queryString, searchOptions.location))
           }
         }, JobConstants.PollingWait)
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        // pollingResults = setInterval(() => {
-        //   dispatch(getJobs(searchOptions.queryString, searchOptions.location))
-        //   setTimeout(() => {
-        //     clearInterval(pollingResults)
-        //     console.log('time out')
-        //   }, JobConstants.TimeoutWait)
-        // }, JobConstants.PollingWait)
       }
       return () => clearInterval(pollingResults)
     }
