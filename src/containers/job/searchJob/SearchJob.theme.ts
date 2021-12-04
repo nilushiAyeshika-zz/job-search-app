@@ -11,8 +11,18 @@ const SearchJobWrapper = styled.div`
     padding: 0 2rem;
   }
 
-  .searchJob__header {
+  .searchJob__clear {
     margin-bottom: 5.5rem;
+    margin-top: 2rem;
+    text-decoration: underline;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .searchJob__icon {
+    font-size: 7.5rem;
+    margin-top: 5rem;
   }
 
   @media (max-width: 620px) {

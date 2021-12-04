@@ -1,6 +1,12 @@
 import { Dispatch } from 'redux'
 
-import { GET_JOBS, GET_JOBS_SUCCESS, GET_JOBS_ERROR, JobsDispatchTypes } from './JobsAction.types'
+import {
+  GET_JOBS,
+  GET_JOBS_SUCCESS,
+  GET_JOBS_ERROR,
+  CLEAR_SEARCH_RESULTS,
+  JobsDispatchTypes
+} from './JobsAction.types'
 
 import JobsApi from '../../api/JobsApi'
 
@@ -30,5 +36,16 @@ export const getJobs =
       dispatch({
         type: GET_JOBS_ERROR,
       })
+    }
+  }
+
+  export const clearResults = 
+  () => async (dispatch: Dispatch<JobsDispatchTypes>) => {
+    try {
+      dispatch({
+        type: CLEAR_SEARCH_RESULTS,
+      })
+    } catch (e) {
+      console.error(e)
     }
   }

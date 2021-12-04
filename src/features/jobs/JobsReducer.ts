@@ -1,4 +1,4 @@
-import { GET_JOBS, GET_JOBS_SUCCESS, GET_JOBS_ERROR, JobsDispatchTypes } from './JobsAction.types'
+import { GET_JOBS, GET_JOBS_SUCCESS, GET_JOBS_ERROR, CLEAR_SEARCH_RESULTS, JobsDispatchTypes } from './JobsAction.types'
 import { IJobsDefaultState } from './JobsReducer.types'
 
 const defaultState: IJobsDefaultState = {
@@ -36,6 +36,16 @@ const JobsReducer = (
         ...state,
         isLoading: false,
         jobList: undefined,
+      }
+    case CLEAR_SEARCH_RESULTS:
+      return {
+        ...state,
+        isLoading: false,
+        jobList: undefined,
+        searchOptions: {
+          queryString: '',
+          location: '',
+        },
       }
     default:
       return state

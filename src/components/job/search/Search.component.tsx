@@ -8,6 +8,7 @@ import Button from '../../../components/core/button/Button.component'
 import Text from '../../../components/core/text/Text.component'
 import { getJobs } from '../../../features/jobs/JobsAction'
 import { ISearchProps, ISearchFormValues } from './Search.types'
+import { JobConstants } from '../../../constants/JobConstants'
 
 import { SearchWrapper } from './Search.theme'
 
@@ -15,6 +16,7 @@ const Search: React.FC<ISearchProps> = (props) => {
   const { className, onSubmitSuccess } = props
 
   const dispatch = useDispatch()
+  let pollingResults: any
   const { searchOptions, jobList } = useSelector((state: any) => state.jobs)
   const [buttonDisabled, setButtonDisabled] = useState(false)
   const initialValues: ISearchFormValues = { location: searchOptions.location, queryString: searchOptions.queryString }
@@ -35,22 +37,19 @@ const Search: React.FC<ISearchProps> = (props) => {
     }
   )
 
-  let pollingResults: any
-  const POLLING_END_TIME= 10000
-
   useEffect(() => {
     if (searchOptions.queryString !== '' || searchOptions.location !== '') {
       const startTime = new Date().getTime()
       if (!jobList) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         pollingResults = setInterval(() => {
-          if (new Date().getTime() - startTime > POLLING_END_TIME) {
+          if (new Date().getTime() - startTime > JobConstants.TimeoutWait) {
           console.log('stop-polling-time-out')
            clearInterval(pollingResults)
           } else {
             dispatch(getJobs(searchOptions.queryString, searchOptions.location))
           }
-        }, 1000)
+        }, JobConstants.PollingWait)
       }
       return () => clearInterval(pollingResults)
     }

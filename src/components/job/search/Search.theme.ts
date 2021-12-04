@@ -9,7 +9,6 @@ export const SearchWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
-  margin-bottom: 5.5rem;
 
   .formik-label {
     margin-bottom: 1rem;

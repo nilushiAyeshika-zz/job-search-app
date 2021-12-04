@@ -4,6 +4,8 @@ export const GET_JOBS = 'GET_JOBS'
 export const GET_JOBS_SUCCESS = 'GET_JOBS_SUCCESS'
 export const GET_JOBS_ERROR = 'GET_JOBS_ERROR'
 
+export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS'
+
 export interface IGetJobs {
   type: typeof GET_JOBS
   payload: {
@@ -22,5 +24,8 @@ export interface IGetJobsSuccess {
 export interface IGetJobsError {
   type: typeof GET_JOBS_ERROR
 }
+export interface IClearResults {
+  type: typeof CLEAR_SEARCH_RESULTS
+}
 
-export type JobsDispatchTypes = IGetJobs | IGetJobsSuccess | IGetJobsError
+export type JobsDispatchTypes = IGetJobs | IGetJobsSuccess | IGetJobsError | IClearResults
