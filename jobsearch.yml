@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  client:
+    container_name: jobsearch
+    image: jobsearch
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 3000:3000

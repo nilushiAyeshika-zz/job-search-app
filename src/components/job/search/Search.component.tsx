@@ -29,6 +29,7 @@ const Search: React.FC<ISearchProps> = (props) => {
     setButtonDisabled(true)
     dispatch(getJobs(values.queryString, values.location))
     setButtonDisabled(false)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const schema = Yup.object().shape({

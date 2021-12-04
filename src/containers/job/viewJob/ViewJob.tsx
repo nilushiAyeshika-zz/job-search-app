@@ -41,11 +41,13 @@ const ViewJobScreen: FC = () => {
 
   const handleBackNavigation = useCallback(() => {
     navigate('/')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleApplyToJob = useCallback(() => {
     dispatch(applyToJob(jobId as string))
     toast.success('You are applied to the job successfully.', { autoClose: 1500 })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

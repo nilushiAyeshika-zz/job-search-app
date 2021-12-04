@@ -23,14 +23,16 @@ const SearchJobScreen: FC = () => {
   const { jobList, isLoading, appliedJobs, isPollingTimeOut } = useSelector(
     (state: any) => state.jobs
   )
-  const placeholderItemsCount = JobConstants.defaultPlaceholderCount
+  const placeholderItemsCount = JobConstants.DefaultPlaceholderCount
 
   const handleJobDescription = useCallback((value) => {
     navigate(`job/${value}`)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleClearResults = useCallback(() => {
     dispatch(clearResults())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const renderLoading = () => (
