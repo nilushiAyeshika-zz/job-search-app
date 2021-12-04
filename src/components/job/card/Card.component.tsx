@@ -52,6 +52,11 @@ const Card: React.FC<CardProps> = (props) => {
       <Text margin="0 0 1rem 0" size="s">
         {company}
       </Text>
+      <Grid className="card__job">
+        <Text size="xs" color="typo-label" weight="bold">
+          Full-time
+        </Text>
+      </Grid>
       <Grid margin="0 0 1rem 0">
         <Text size="xms" color="typo-middle-light">
           <span dangerouslySetInnerHTML={{ __html: description }} className="card__description"/>
@@ -63,11 +68,6 @@ const Card: React.FC<CardProps> = (props) => {
       </Grid>
       <Grid>
         <Text size="xs">{postedDay}</Text>
-      </Grid>
-      <Grid className="card__job">
-        <Text size="xs" color="typo-label" weight="bold">
-          Full-time
-        </Text>
       </Grid>
     </CardWrapper>
   )

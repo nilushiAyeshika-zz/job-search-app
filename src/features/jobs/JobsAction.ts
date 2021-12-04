@@ -6,6 +6,7 @@ import {
   GET_JOBS_ERROR,
   CLEAR_SEARCH_RESULTS,
   APPLY_TO_JOB,
+  POLLING_TIME_OUT,
   JobsDispatchTypes
 } from './JobsAction.types'
 
@@ -23,7 +24,6 @@ export const getJobs =
           },
         },
       })
-      console.log('call-api')
       const { data } = await JobsApi.getJobs(query, location)
       if (Array.isArray(data)) {
         dispatch({
@@ -57,6 +57,17 @@ export const getJobs =
       dispatch({
         type: APPLY_TO_JOB,
         payload: id,
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  export const pollingTimeOut = 
+  () => async (dispatch: Dispatch<JobsDispatchTypes>) => {
+    try {
+      dispatch({
+        type: POLLING_TIME_OUT,
       })
     } catch (e) {
       console.error(e)

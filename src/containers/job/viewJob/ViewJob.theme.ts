@@ -65,6 +65,12 @@ const ViewJobWrapper = styled.div`
     }
   }
 
+  .job__Link {
+    a {
+      color: ${appTheme.colors.TYPOGRAPHY_DARK};
+    }
+  }
+
   @media (max-width: 800px) {
     .viewJob__Inner {
       width: 100%;

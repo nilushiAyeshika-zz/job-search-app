@@ -49,6 +49,10 @@ export const SearchWrapper = styled.div`
         margin-bottom: 1rem;
       }
     }
+
+    .search__button {
+      justify-content: center;
+    }
   }
 
   @media (max-width: 620px) {

@@ -62,6 +62,15 @@ const CardWrapper = styled.div<CardProps>`
   @media (max-width: 620px) {
     width: 100%;
   }
+
+  @media (max-width: 800px) {
+    .card__job {
+      position: relative;
+      top: auto;
+      right: 0;
+      margin-bottom: 2rem;
+    }
+  }
 `
 
 export default CardWrapper

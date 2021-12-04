@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Grid from '../../layout/grid/Grid.component'
 import Button from '../../../components/core/button/Button.component'
 import Text from '../../../components/core/text/Text.component'
-import { getJobs } from '../../../features/jobs/JobsAction'
+import { getJobs, pollingTimeOut } from '../../../features/jobs/JobsAction'
 import { ISearchProps, ISearchFormValues } from './Search.types'
 import { JobConstants } from '../../../constants/JobConstants'
 
@@ -24,9 +24,7 @@ const Search: React.FC<ISearchProps> = (props) => {
   const handleSubmit = useCallback(async (values, actions) => {
     actions.setSubmitting(false)
     setButtonDisabled(true)
-
     dispatch(getJobs(values.queryString, values.location))
-
     setButtonDisabled(false)
   }, [])
 
@@ -45,10 +43,20 @@ const Search: React.FC<ISearchProps> = (props) => {
           if (new Date().getTime() - startTime > JobConstants.TimeoutWait) {
           console.log('stop-polling-time-out')
            clearInterval(pollingResults)
+           dispatch(pollingTimeOut())
           } else {
             dispatch(getJobs(searchOptions.queryString, searchOptions.location))
           }
         }, JobConstants.PollingWait)
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // pollingResults = setInterval(() => {       
+        //   dispatch(getJobs(searchOptions.queryString, searchOptions.location))
+        //   setTimeout(() => {
+        //     clearInterval(pollingResults)
+        //     console.log('time out')
+        //   }, JobConstants.TimeoutWait)
+        // }, JobConstants.PollingWait)
       }
       return () => clearInterval(pollingResults)
     }
@@ -90,7 +98,7 @@ const Search: React.FC<ISearchProps> = (props) => {
                   <ErrorMessage name="queryString" component="div" className="formik-error-label" />
                 </Grid>
               </Grid>
-              <Grid>
+              <Grid className="search__button">
                 <Button type="submit" width="15rem" height="4.5rem" disabled={buttonDisabled}>
                   <Text size="m" color="typo-white">
                     Search

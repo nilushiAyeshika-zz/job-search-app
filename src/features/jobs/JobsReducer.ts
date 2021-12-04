@@ -4,6 +4,7 @@ import {
   GET_JOBS_ERROR,
   CLEAR_SEARCH_RESULTS,
   APPLY_TO_JOB,
+  POLLING_TIME_OUT,
   JobsDispatchTypes
 } from './JobsAction.types'
 import { IJobsDefaultState } from './JobsReducer.types'
@@ -16,6 +17,7 @@ const defaultState: IJobsDefaultState = {
     location: '',
   },
   appliedJobs: [],
+  isPollingTimeOut: false,
 }
 
 const JobsReducer = (
@@ -32,18 +34,21 @@ const JobsReducer = (
           location: action.payload.searchOptions.location,
         },
         jobList: undefined,
+        isPollingTimeOut: false,
       }
     case GET_JOBS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         jobList: action.payload.jobList,
+        isPollingTimeOut: false,
       }
     case GET_JOBS_ERROR:
       return {
         ...state,
         isLoading: false,
         jobList: undefined,
+        isPollingTimeOut: false,
       }
     case CLEAR_SEARCH_RESULTS:
       return {
@@ -54,6 +59,14 @@ const JobsReducer = (
           queryString: '',
           location: '',
         },
+        isPollingTimeOut: false,
+      }
+    case POLLING_TIME_OUT:
+      return {
+        ...state,
+        jobList: [],
+        isPollingTimeOut: true,
+        isLoading: false,
       }
     case APPLY_TO_JOB:
       return {

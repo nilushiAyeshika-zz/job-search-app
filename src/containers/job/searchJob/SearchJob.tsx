@@ -12,13 +12,14 @@ import Header from '../../../components/shared/header/Header.component'
 import { IJob } from './SearchJob.types'
 import { clearResults } from '../../../features/jobs/JobsAction'
 import JobListLoader from '../../../components/shared/contentLoaders/jobListLoader/JobListLoader.component'
+import { checkValueExits } from '../../../utils/CommonFunctions.utils'
 
 import SearchJobWrapper from './SearchJob.theme'
 
 const SearchJobScreen: FC = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { jobList, isLoading } = useSelector((state: any) => state.jobs)
+  const { jobList, isLoading, appliedJobs, isPollingTimeOut } = useSelector((state: any) => state.jobs)
   const placeholderItemsCount = 2;
 
   const handleJobDescription = useCallback((value) => {
@@ -28,8 +29,6 @@ const SearchJobScreen: FC = () => {
   const handleClearResults = useCallback(() => {
     dispatch(clearResults())
   }, [])
-
-  console.log('jobList',jobList)
 
   const renderLoading = () => (
     <Grid margin="5rem 0 2rem 0" alignItems="center" direction="column">
@@ -47,6 +46,13 @@ const SearchJobScreen: FC = () => {
     </Grid>
   )
 
+  const renderPollingTimeOutState = () => (
+    <Grid margin="12rem 0 2rem 0" alignItems="center" direction="column">
+      <Text size="xxl">Sorry, Something went wrong, Please try again.</Text>
+      <FontAwesomeIcon icon={faMeh} className="searchJob__icon" />
+    </Grid>
+  )
+
   const renderInitialState = () => (
     <Grid margin="12rem 0 2rem 0" alignItems="center" direction="column">
       <Text size="xxl">Search for show results.</Text>
@@ -55,20 +61,24 @@ const SearchJobScreen: FC = () => {
   )
 
   const renderSearchResults = () => (
-    jobList.map((job: IJob) => (
-      <Card
-        key={job.Guid}
-        id={job.Guid}
-        jobTitle={job.Title}
-        company={job.Company}
-        description={job.Description}
-        location={job.Location}
-        jobPostedDay={job.Published}
-        callbackValue={job.Guid}
-        // isApplied
-        onClick={handleJobDescription}
-      />
-    ))
+    jobList.map((job: IJob) => {
+      const isApplied = checkValueExits(job.Guid, appliedJobs)
+
+      return (
+        <Card
+          key={job.Guid}
+          id={job.Guid}
+          jobTitle={job.Title}
+          company={job.Company}
+          description={job.Description}
+          location={job.Location}
+          jobPostedDay={job.Published}
+          callbackValue={job.Guid}
+          isApplied={isApplied}
+          onClick={handleJobDescription}
+        />
+      )
+    })
   )
 
   const renderJobList = () => {
@@ -78,8 +88,10 @@ const SearchJobScreen: FC = () => {
       return renderInitialState()
     } else if (jobList && jobList?.length > 0) {
       return renderSearchResults()
-    } else if (jobList && jobList?.length === 0) {
+    } else if (jobList && jobList?.length === 0 && !isPollingTimeOut) {
       return renderNoResults()
+    } else if (isPollingTimeOut) {
+      return renderPollingTimeOutState()
     }
   }
 

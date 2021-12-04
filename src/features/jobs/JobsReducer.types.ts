@@ -8,4 +8,5 @@ export interface IJobsDefaultState {
     location: string
   }
   appliedJobs: string[]
+  isPollingTimeOut: boolean
 }

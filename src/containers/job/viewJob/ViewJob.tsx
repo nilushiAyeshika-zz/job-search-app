@@ -4,6 +4,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
+import { toast } from 'react-toastify'
 
 import Header from '../../../components/shared/header/Header.component'
 import Grid from '../../../components/layout/grid/Grid.component'
@@ -36,7 +37,7 @@ const ViewJobScreen: FC = () => {
   const [jobDetails, setJobDetails] = useState<IJob>(initialJobDetails)
 
   const postedDay = moment(jobDetails?.Published).format("DD MMM YYYY")
-  const isAppliedForJob = checkValueExits(jobId as string, appliedJobs)
+  const isApplied = checkValueExits(jobId as string, appliedJobs)
 
   const handleBackNavigation = useCallback(() => {
     navigate('/')
@@ -44,15 +45,13 @@ const ViewJobScreen: FC = () => {
 
   const handleApplyToJob = useCallback(() => {
     dispatch(applyToJob(jobId as string))
+    toast.success('You are applied to the job successfully.', { autoClose: 1500 })
   }, [])
 
   useEffect(() => {
     const selectedJob = jobList?.filter((job: IJob) => (job.Guid === jobId))
     setJobDetails(selectedJob?.[0])
   }, [jobList, jobId])
-
-  console.log(jobList)
-  console.log(isAppliedForJob)
 
   return (
     <ViewJobWrapper>
@@ -71,7 +70,9 @@ const ViewJobScreen: FC = () => {
               <Text size="l" weight="medium" margin="0 2rem 0.4rem 0">
                 {jobDetails?.Title}
               </Text>
-              <Text margin="0 0 0.4rem 0">{jobDetails?.Company}</Text>
+              <Text margin="0 0 0.4rem 0" className="job__Link">
+                <a href={jobDetails?.Url} target='_blank' rel="noreferrer">{jobDetails?.Company}</a>
+              </Text>
               <Text margin="0 0 0.4rem 0">{jobDetails?.Location}</Text>
               <Text size="xxs" margin="0 0 0.4rem 0">
                 {postedDay}
@@ -81,7 +82,7 @@ const ViewJobScreen: FC = () => {
               </Text>
             </Grid>
             <Grid width="auto" padding="2rem 0 0 0" className="job__apply">
-              {isAppliedForJob ?
+              {isApplied ?
                 <StatusLabel label="Applied" className="job__status"/>
                 :
               <Button
@@ -102,7 +103,7 @@ const ViewJobScreen: FC = () => {
             <span dangerouslySetInnerHTML={{ __html: jobDetails?.Description }} className="card__description"/>
           </Grid>
           <Grid width="auto" padding="4rem 0 0 0" justifyContent="center">
-          {!isAppliedForJob && (
+          {!isApplied && (
             <Button
               type="submit"
               width="12rem"
