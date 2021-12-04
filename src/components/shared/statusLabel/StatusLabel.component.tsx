@@ -9,8 +9,8 @@ const StatusLabel: FC<StatusLabelProps> = (props) => {
   const { className, label } = props
 
   return (
-    <StatusLabelWrapper className={className}>
-      <Text color="typo-middle-light" className="card__applied">
+    <StatusLabelWrapper className={className} data-test="status-label-wrapper">
+      <Text color="typo-middle-light" className="card__applied" data-test="status-text">
         {label}
       </Text>
     </StatusLabelWrapper>

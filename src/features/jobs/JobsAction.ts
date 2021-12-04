@@ -41,7 +41,6 @@ export const getJobs =
     }
   }
 
-
 // action for clear searched results
 export const clearResults = () => async (dispatch: Dispatch<JobsDispatchTypes>) => {
   try {

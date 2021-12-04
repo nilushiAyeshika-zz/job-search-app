@@ -27,16 +27,21 @@ const SearchJobScreen: FC = () => {
 
   const handleJobDescription = useCallback((value) => {
     navigate(`job/${value}`)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleClearResults = useCallback(() => {
     dispatch(clearResults())
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const renderLoading = () => (
-    <Grid margin="5rem 0 2rem 0" alignItems="center" direction="column">
+    <Grid
+      margin="5rem 0 2rem 0"
+      alignItems="center"
+      direction="column"
+      data-test="search-job-result-loading"
+    >
       <Text size="xxl" margin="0 0 5rem 0">
         Your results will appear here....
       </Text>
@@ -47,21 +52,36 @@ const SearchJobScreen: FC = () => {
   )
 
   const renderNoResults = () => (
-    <Grid margin="12rem 0 2rem 0" alignItems="center" direction="column">
+    <Grid
+      margin="12rem 0 2rem 0"
+      alignItems="center"
+      direction="column"
+      data-test="search-job-no-data-found-message"
+    >
       <Text size="xxl">Sorry, No results found.</Text>
       <FontAwesomeIcon icon={faMeh} className="searchJob__icon" />
     </Grid>
   )
 
   const renderPollingTimeOutState = () => (
-    <Grid margin="12rem 0 2rem 0" alignItems="center" direction="column">
+    <Grid
+      margin="12rem 0 2rem 0"
+      alignItems="center"
+      direction="column"
+      data-test="search-job-error-message"
+    >
       <Text size="xxl">Sorry, Something went wrong, Please try again.</Text>
       <FontAwesomeIcon icon={faMeh} className="searchJob__icon" />
     </Grid>
   )
 
   const renderInitialState = () => (
-    <Grid margin="12rem 0 2rem 0" alignItems="center" direction="column">
+    <Grid
+      margin="12rem 0 2rem 0"
+      alignItems="center"
+      direction="column"
+      data-test="search-job-initial-message"
+    >
       <Text size="xxl">Search for show results.</Text>
       <FontAwesomeIcon icon={faSearch} className="searchJob__icon" />
     </Grid>
@@ -84,19 +104,20 @@ const SearchJobScreen: FC = () => {
           callbackValue={job.Guid}
           isApplied={isApplied}
           onClick={handleJobDescription}
+          data-test="job-card-component"
         />
       )
     })
 
-/**
- * check the relevant states and return matching content
- * loading state
- * initial state
- * search results display
- * no results
- * polling time out
- * @returns relevant content
- */
+  /**
+   * check the relevant states and return matching content
+   * loading state
+   * initial state
+   * search results display
+   * no results
+   * polling time out
+   * @returns relevant content
+   */
 
   const renderJobList = () => {
     if (isLoading) {
@@ -113,7 +134,7 @@ const SearchJobScreen: FC = () => {
   }
 
   return (
-    <SearchJobWrapper>
+    <SearchJobWrapper data-test="search-job-wrapper">
       <Header />
       <Grid className="searchJob__Inner" direction="column" alignItems="center">
         <Text
@@ -123,6 +144,7 @@ const SearchJobScreen: FC = () => {
           textAlign="center"
           className="searchJob__header"
           margin="0 0 5.5rem 0"
+          data-test="search-job-welcome-text"
         >
           Welcome to Dev Jobs
         </Text>
@@ -133,6 +155,7 @@ const SearchJobScreen: FC = () => {
             size="m"
             color="typo-white"
             onClick={handleClearResults}
+            data-test="search-job-result-clear"
           >
             Clear Search
           </Text>

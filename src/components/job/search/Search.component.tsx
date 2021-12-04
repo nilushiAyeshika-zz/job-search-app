@@ -29,7 +29,7 @@ const Search: React.FC<ISearchProps> = (props) => {
     setButtonDisabled(true)
     dispatch(getJobs(values.queryString, values.location))
     setButtonDisabled(false)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const schema = Yup.object().shape({
@@ -39,7 +39,7 @@ const Search: React.FC<ISearchProps> = (props) => {
   /**
    * Polling results for one minute
    * after one minute it will give a timeout
- */
+   */
 
   useEffect(() => {
     if (searchOptions.queryString !== '' || searchOptions.location !== '') {
@@ -60,14 +60,14 @@ const Search: React.FC<ISearchProps> = (props) => {
   }, [searchOptions.queryString, searchOptions.location, jobList])
 
   return (
-    <SearchWrapper className={className}>
+    <SearchWrapper className={className} data-test="search-wrapper">
       <Formik
         enableReinitialize
         initialValues={initialValues}
         onSubmit={(values, actions) => handleSubmit(values, actions)}
         validationSchema={schema}
         render={({ handleChange, values }) => (
-          <Form data-test="add-new-question-form">
+          <Form data-test="search-form">
             <Grid direction="row" className="search__innerWrapper">
               <Grid className="search__fieldsWrapper">
                 <Grid direction="column" className="search__fieldWrapper">
@@ -79,6 +79,7 @@ const Search: React.FC<ISearchProps> = (props) => {
                     autoComplete="off"
                     onChange={handleChange}
                     value={values.location}
+                    data-test="search-location-field"
                   />
                   <ErrorMessage name="location" component="div" className="formik-error-label" />
                 </Grid>
@@ -91,12 +92,19 @@ const Search: React.FC<ISearchProps> = (props) => {
                     autoComplete="off"
                     onChange={handleChange}
                     value={values.queryString}
+                    data-test="search-query-field"
                   />
                   <ErrorMessage name="queryString" component="div" className="formik-error-label" />
                 </Grid>
               </Grid>
               <Grid className="search__button">
-                <Button type="submit" width="15rem" height="4.5rem" disabled={buttonDisabled}>
+                <Button
+                  type="submit"
+                  width="15rem"
+                  height="4.5rem"
+                  disabled={buttonDisabled}
+                  data-test="search-button"
+                >
                   <Text size="m" color="typo-white">
                     Search
                   </Text>

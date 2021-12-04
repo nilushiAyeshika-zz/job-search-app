@@ -1,6 +1,6 @@
 import { FC, useCallback, useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
@@ -41,13 +41,13 @@ const ViewJobScreen: FC = () => {
 
   const handleBackNavigation = useCallback(() => {
     navigate('/')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleApplyToJob = useCallback(() => {
     dispatch(applyToJob(jobId as string))
     toast.success('You are applied to the job successfully.', { autoClose: 1500 })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -56,8 +56,8 @@ const ViewJobScreen: FC = () => {
   }, [jobList, jobId])
 
   return (
-    <ViewJobWrapper>
-      <Header />
+    <ViewJobWrapper data-test="view-job-wrapper">
+      <Header data-test="view-job-header" />
       <Grid className="viewJob__main" direction="column">
         <Grid className="viewJob__Inner" direction="column">
           <Button
@@ -66,30 +66,54 @@ const ViewJobScreen: FC = () => {
             backgroundColor="transparent"
             hoverColor="transparent"
             onClick={handleBackNavigation}
+            data-test="view-job-back-navigation"
           />
           <Grid direction="row" className="job__header">
             <Grid direction="column" className="job__innerHeader">
-              <Text size="l" weight="medium" margin="0 2rem 0.4rem 0">
+              <Text size="l" weight="medium" margin="0 2rem 0.4rem 0" data-test="view-job-title">
                 {jobDetails?.Title}
               </Text>
-              <Text margin="0 0 0.4rem 0" className="job__Link">
+              <Text margin="0 0 0.4rem 0" className="job__Link" data-test="view-job-company">
                 <a href={jobDetails?.Url} target="_blank" rel="noreferrer">
                   {jobDetails?.Company}
                 </a>
               </Text>
-              <Text margin="0 0 0.4rem 0">{jobDetails?.Location}</Text>
-              <Text size="xxs" margin="0 0 0.4rem 0">
+              <Text
+                margin="0 0 0.4rem 0"
+                className="job__locationIcon"
+                data-test="view-job-location"
+              >
+                <FontAwesomeIcon icon={faMapMarkerAlt} data-test="view-job-location-icon" />
+                {jobDetails?.Location}
+              </Text>
+              <Text size="xxs" margin="0 0 0.4rem 0" data-test="view-job-posted-day">
                 {postedDay}
               </Text>
-              <Text size="xxs" color="typo-label" weight="bold" className="job__label">
+              <Text
+                size="xxs"
+                color="typo-label"
+                weight="bold"
+                className="job__label"
+                data-test="view-job-type"
+              >
                 Full-time
               </Text>
             </Grid>
             <Grid width="auto" padding="2rem 0 0 0" className="job__apply">
               {isApplied ? (
-                <StatusLabel label="Applied" className="job__status" />
+                <StatusLabel
+                  label="Applied"
+                  className="job__status"
+                  data-test="view-job-applied-label"
+                />
               ) : (
-                <Button type="submit" width="12rem" height="4.5rem" onClick={handleApplyToJob}>
+                <Button
+                  type="submit"
+                  width="12rem"
+                  height="4.5rem"
+                  onClick={handleApplyToJob}
+                  data-test="view-job-apply-button"
+                >
                   <Text size="m" color="typo-white">
                     Apply
                   </Text>
@@ -106,7 +130,13 @@ const ViewJobScreen: FC = () => {
           </Grid>
           <Grid width="auto" padding="4rem 0 0 0" justifyContent="center">
             {!isApplied && (
-              <Button type="submit" width="12rem" height="4.5rem" onClick={handleApplyToJob}>
+              <Button
+                type="submit"
+                width="12rem"
+                height="4.5rem"
+                onClick={handleApplyToJob}
+                data-test="view-job-apply-button"
+              >
                 <Text size="m" color="typo-white">
                   Apply
                 </Text>

@@ -71,6 +71,15 @@ const ViewJobWrapper = styled.div`
     }
   }
 
+  .job__locationIcon {
+    display: flex;
+    align-items: center;
+    svg {
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+  }
+
   @media (max-width: 800px) {
     .viewJob__Inner {
       width: 100%;
