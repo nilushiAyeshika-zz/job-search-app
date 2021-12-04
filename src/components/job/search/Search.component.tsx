@@ -19,7 +19,10 @@ const Search: React.FC<ISearchProps> = (props) => {
   let pollingResults: any
   const { searchOptions, jobList } = useSelector((state: any) => state.jobs)
   const [buttonDisabled, setButtonDisabled] = useState(false)
-  const initialValues: ISearchFormValues = { location: searchOptions.location, queryString: searchOptions.queryString }
+  const initialValues: ISearchFormValues = {
+    location: searchOptions.location,
+    queryString: searchOptions.queryString,
+  }
 
   const handleSubmit = useCallback(async (values, actions) => {
     actions.setSubmitting(false)
@@ -28,11 +31,9 @@ const Search: React.FC<ISearchProps> = (props) => {
     setButtonDisabled(false)
   }, [])
 
-  const schema = Yup.object().shape(
-    {
-      queryString: Yup.string().trim().required('Query string is required')
-    }
-  )
+  const schema = Yup.object().shape({
+    queryString: Yup.string().trim().required('Query string is required'),
+  })
 
   useEffect(() => {
     if (searchOptions.queryString !== '' || searchOptions.location !== '') {
@@ -41,16 +42,16 @@ const Search: React.FC<ISearchProps> = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         pollingResults = setInterval(() => {
           if (new Date().getTime() - startTime > JobConstants.TimeoutWait) {
-          console.log('stop-polling-time-out')
-           clearInterval(pollingResults)
-           dispatch(pollingTimeOut())
+            console.log('stop-polling-time-out')
+            clearInterval(pollingResults)
+            dispatch(pollingTimeOut())
           } else {
             dispatch(getJobs(searchOptions.queryString, searchOptions.location))
           }
         }, JobConstants.PollingWait)
-        
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        // pollingResults = setInterval(() => {       
+        // pollingResults = setInterval(() => {
         //   dispatch(getJobs(searchOptions.queryString, searchOptions.location))
         //   setTimeout(() => {
         //     clearInterval(pollingResults)
@@ -108,8 +109,7 @@ const Search: React.FC<ISearchProps> = (props) => {
             </Grid>
           </Form>
         )}
-      >
-      </Formik>
+      ></Formik>
     </SearchWrapper>
   )
 }

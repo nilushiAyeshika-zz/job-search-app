@@ -36,7 +36,7 @@ const ViewJobScreen: FC = () => {
 
   const [jobDetails, setJobDetails] = useState<IJob>(initialJobDetails)
 
-  const postedDay = moment(jobDetails?.Published).format("DD MMM YYYY")
+  const postedDay = moment(jobDetails?.Published).format('DD MMM YYYY')
   const isApplied = checkValueExits(jobId as string, appliedJobs)
 
   const handleBackNavigation = useCallback(() => {
@@ -49,7 +49,7 @@ const ViewJobScreen: FC = () => {
   }, [])
 
   useEffect(() => {
-    const selectedJob = jobList?.filter((job: IJob) => (job.Guid === jobId))
+    const selectedJob = jobList?.filter((job: IJob) => job.Guid === jobId)
     setJobDetails(selectedJob?.[0])
   }, [jobList, jobId])
 
@@ -71,7 +71,9 @@ const ViewJobScreen: FC = () => {
                 {jobDetails?.Title}
               </Text>
               <Text margin="0 0 0.4rem 0" className="job__Link">
-                <a href={jobDetails?.Url} target='_blank' rel="noreferrer">{jobDetails?.Company}</a>
+                <a href={jobDetails?.Url} target="_blank" rel="noreferrer">
+                  {jobDetails?.Company}
+                </a>
               </Text>
               <Text margin="0 0 0.4rem 0">{jobDetails?.Location}</Text>
               <Text size="xxs" margin="0 0 0.4rem 0">
@@ -82,39 +84,32 @@ const ViewJobScreen: FC = () => {
               </Text>
             </Grid>
             <Grid width="auto" padding="2rem 0 0 0" className="job__apply">
-              {isApplied ?
-                <StatusLabel label="Applied" className="job__status"/>
-                :
-              <Button
-                type="submit"
-                width="12rem"
-                height="4.5rem"
-                onClick={handleApplyToJob}
-              >
-                <Text size="m" color="typo-white">
-                  Apply
-                </Text>
-              </Button>
-              }
+              {isApplied ? (
+                <StatusLabel label="Applied" className="job__status" />
+              ) : (
+                <Button type="submit" width="12rem" height="4.5rem" onClick={handleApplyToJob}>
+                  <Text size="m" color="typo-white">
+                    Apply
+                  </Text>
+                </Button>
+              )}
             </Grid>
           </Grid>
 
           <Grid className="job__description" direction="column">
-            <span dangerouslySetInnerHTML={{ __html: jobDetails?.Description }} className="card__description"/>
+            <span
+              dangerouslySetInnerHTML={{ __html: jobDetails?.Description }}
+              className="card__description"
+            />
           </Grid>
           <Grid width="auto" padding="4rem 0 0 0" justifyContent="center">
-          {!isApplied && (
-            <Button
-              type="submit"
-              width="12rem"
-              height="4.5rem"
-              onClick={handleApplyToJob}
-            >
-              <Text size="m" color="typo-white">
-                Apply
-              </Text>
-            </Button>
-          )}
+            {!isApplied && (
+              <Button type="submit" width="12rem" height="4.5rem" onClick={handleApplyToJob}>
+                <Text size="m" color="typo-white">
+                  Apply
+                </Text>
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Grid>

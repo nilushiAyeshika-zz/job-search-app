@@ -1,8 +1,8 @@
 import { forwardRef, useCallback } from 'react'
 
 import Grid from '../../layout/grid/Grid.component'
-
 import { ButtonProps } from './Button.types'
+
 import ButtonStyles from './Button.theme'
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {

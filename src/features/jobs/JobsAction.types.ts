@@ -36,4 +36,10 @@ export interface IPollingTimeOut {
   type: typeof POLLING_TIME_OUT
 }
 
-export type JobsDispatchTypes = IGetJobs | IGetJobsSuccess | IGetJobsError | IClearResults | IApplyToJob | IPollingTimeOut
+export type JobsDispatchTypes =
+  | IGetJobs
+  | IGetJobsSuccess
+  | IGetJobsError
+  | IClearResults
+  | IApplyToJob
+  | IPollingTimeOut

@@ -5,7 +5,7 @@ import {
   CLEAR_SEARCH_RESULTS,
   APPLY_TO_JOB,
   POLLING_TIME_OUT,
-  JobsDispatchTypes
+  JobsDispatchTypes,
 } from './JobsAction.types'
 import { IJobsDefaultState } from './JobsReducer.types'
 
@@ -71,7 +71,7 @@ const JobsReducer = (
     case APPLY_TO_JOB:
       return {
         ...state,
-        appliedJobs: [...state.appliedJobs, action.payload]
+        appliedJobs: [...state.appliedJobs, action.payload],
       }
     default:
       return state

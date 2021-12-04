@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = (props) => {
     onClick?.(callbackValue)
   }, [callbackValue, onClick])
 
-  const postedDay = moment(jobPostedDay).format("DD MMM YYYY")
+  const postedDay = moment(jobPostedDay).format('DD MMM YYYY')
 
   return (
     <CardWrapper
@@ -59,7 +59,7 @@ const Card: React.FC<CardProps> = (props) => {
       </Grid>
       <Grid margin="0 0 1rem 0">
         <Text size="xms" color="typo-middle-light">
-          <span dangerouslySetInnerHTML={{ __html: description }} className="card__description"/>
+          <span dangerouslySetInnerHTML={{ __html: description }} className="card__description" />
         </Text>
       </Grid>
       <Grid margin="0 0 1rem 0" alignItems="center">

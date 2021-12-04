@@ -7,7 +7,7 @@ import {
   CLEAR_SEARCH_RESULTS,
   APPLY_TO_JOB,
   POLLING_TIME_OUT,
-  JobsDispatchTypes
+  JobsDispatchTypes,
 } from './JobsAction.types'
 
 import JobsApi from '../../api/JobsApi'
@@ -40,36 +40,33 @@ export const getJobs =
     }
   }
 
-  export const clearResults = 
-  () => async (dispatch: Dispatch<JobsDispatchTypes>) => {
-    try {
-      dispatch({
-        type: CLEAR_SEARCH_RESULTS,
-      })
-    } catch (e) {
-      console.error(e)
-    }
+export const clearResults = () => async (dispatch: Dispatch<JobsDispatchTypes>) => {
+  try {
+    dispatch({
+      type: CLEAR_SEARCH_RESULTS,
+    })
+  } catch (e) {
+    console.error(e)
   }
+}
 
-  export const applyToJob = 
-  (id: string) => async (dispatch: Dispatch<JobsDispatchTypes>) => {
-    try {
-      dispatch({
-        type: APPLY_TO_JOB,
-        payload: id,
-      })
-    } catch (e) {
-      console.error(e)
-    }
+export const applyToJob = (id: string) => async (dispatch: Dispatch<JobsDispatchTypes>) => {
+  try {
+    dispatch({
+      type: APPLY_TO_JOB,
+      payload: id,
+    })
+  } catch (e) {
+    console.error(e)
   }
+}
 
-  export const pollingTimeOut = 
-  () => async (dispatch: Dispatch<JobsDispatchTypes>) => {
-    try {
-      dispatch({
-        type: POLLING_TIME_OUT,
-      })
-    } catch (e) {
-      console.error(e)
-    }
+export const pollingTimeOut = () => async (dispatch: Dispatch<JobsDispatchTypes>) => {
+  try {
+    dispatch({
+      type: POLLING_TIME_OUT,
+    })
+  } catch (e) {
+    console.error(e)
   }
+}

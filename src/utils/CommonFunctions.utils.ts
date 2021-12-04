@@ -6,5 +6,5 @@
 export const checkValueExits = (id: string, array: any) => {
   const status = array?.includes(id)
 
-  return status;
+  return status
 }

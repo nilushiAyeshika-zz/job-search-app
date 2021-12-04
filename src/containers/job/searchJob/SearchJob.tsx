@@ -19,8 +19,10 @@ import SearchJobWrapper from './SearchJob.theme'
 const SearchJobScreen: FC = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { jobList, isLoading, appliedJobs, isPollingTimeOut } = useSelector((state: any) => state.jobs)
-  const placeholderItemsCount = 2;
+  const { jobList, isLoading, appliedJobs, isPollingTimeOut } = useSelector(
+    (state: any) => state.jobs
+  )
+  const placeholderItemsCount = 2
 
   const handleJobDescription = useCallback((value) => {
     navigate(`job/${value}`)
@@ -32,7 +34,9 @@ const SearchJobScreen: FC = () => {
 
   const renderLoading = () => (
     <Grid margin="5rem 0 2rem 0" alignItems="center" direction="column">
-      <Text size="xxl" margin="0 0 5rem 0">Your results will appear here....</Text>
+      <Text size="xxl" margin="0 0 5rem 0">
+        Your results will appear here....
+      </Text>
       {Array.from(Array(placeholderItemsCount).keys()).map((index) => (
         <JobListLoader key={index} />
       ))}
@@ -60,7 +64,7 @@ const SearchJobScreen: FC = () => {
     </Grid>
   )
 
-  const renderSearchResults = () => (
+  const renderSearchResults = () =>
     jobList.map((job: IJob) => {
       const isApplied = checkValueExits(job.Guid, appliedJobs)
 
@@ -79,11 +83,10 @@ const SearchJobScreen: FC = () => {
         />
       )
     })
-  )
 
   const renderJobList = () => {
     if (isLoading) {
-      return renderLoading();
+      return renderLoading()
     } else if (!jobList) {
       return renderInitialState()
     } else if (jobList && jobList?.length > 0) {
@@ -110,7 +113,16 @@ const SearchJobScreen: FC = () => {
           Welcome to Dev Jobs
         </Text>
         <Search />
-        {jobList && <Text className="searchJob__clear" size="m" color="typo-white" onClick={handleClearResults}>Clear Search</Text>}
+        {jobList && (
+          <Text
+            className="searchJob__clear"
+            size="m"
+            color="typo-white"
+            onClick={handleClearResults}
+          >
+            Clear Search
+          </Text>
+        )}
         {renderJobList()}
       </Grid>
     </SearchJobWrapper>
