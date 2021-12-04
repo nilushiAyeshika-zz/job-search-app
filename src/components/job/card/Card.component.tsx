@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import moment from 'moment'
 
 import { CardProps } from './Card.types'
 import Text from '../../core/text/Text.component'
@@ -27,32 +28,46 @@ const Card: React.FC<CardProps> = (props) => {
     onClick?.(callbackValue)
   }, [callbackValue, onClick])
 
+  const postedDay = moment(jobPostedDay).format("DD MMM YYYY")
+
   return (
     <CardWrapper
       id={id}
       className={className}
+      jobTitle={jobTitle}
+      company={company}
+      description={description}
+      location={location}
+      jobPostedDay={jobPostedDay}
+      callbackValue={callbackValue}
+      isApplied={isApplied}
       onClick={handleClick}
     >
-      <Grid direction='row'>
-        <Text size='l' weight='medium' className='card__jobTitle'>{jobTitle}</Text>
-        {isApplied && <StatusLabel label="Applied"/>}
+      <Grid direction="row">
+        <Text size="l" weight="medium" className="card__jobTitle">
+          {jobTitle}
+        </Text>
+        {isApplied && <StatusLabel label="Applied" />}
       </Grid>
-      <Text margin='0 0 1rem 0' size='s'>{company}</Text>
-      <Grid margin='0 0 1rem 0'>
-        <Text size='xms' color='typo-middle-light'>{description}</Text>
+      <Text margin="0 0 1rem 0" size="s">
+        {company}
+      </Text>
+      <Grid margin="0 0 1rem 0">
+        <Text size="xms" color="typo-middle-light">
+          <span dangerouslySetInnerHTML={{ __html: description }} className="card__description"/>
+        </Text>
       </Grid>
-      <Grid margin='0 0 1rem 0' alignItems='center'>
-        <FontAwesomeIcon
-          icon={faMapMarkerAlt}
-          className="card__locationIcon"
-        />
+      <Grid margin="0 0 1rem 0" alignItems="center">
+        <FontAwesomeIcon icon={faMapMarkerAlt} className="card__locationIcon" />
         <Text>{location}</Text>
       </Grid>
       <Grid>
-        <Text size='xs'>{jobPostedDay}</Text>
+        <Text size="xs">{postedDay}</Text>
       </Grid>
       <Grid className="card__job">
-        <Text size='xs' color='typo-label' weight='bold'>Full-time</Text>
+        <Text size="xs" color="typo-label" weight="bold">
+          Full-time
+        </Text>
       </Grid>
     </CardWrapper>
   )

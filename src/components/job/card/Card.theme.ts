@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
+import { CardProps } from './Card.types'
+
 import { appTheme } from '../../../theme/Theme'
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.div<CardProps>`
   display: flex;
   flex-direction: column;
   width: 50rem;
@@ -12,6 +14,12 @@ const CardWrapper = styled.div`
   border-radius: 0.2rem;
   margin-bottom: 1rem;
   position: relative;
+  transition: transform 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.04);
+  }
 
   .card__locationIcon {
     margin: -0.1rem 0.4rem 0 0;
@@ -24,7 +32,7 @@ const CardWrapper = styled.div`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 22.5rem;
+    ${(props) => (props.isApplied ? `max-width: 22.5rem` : `max-width: 34.5rem`)};
     width: auto;
     margin-right: 1.5rem;
   }
@@ -41,7 +49,17 @@ const CardWrapper = styled.div`
     top: 2rem;
   }
 
-  @media(max-width: 620px) {
+  .card__description {
+    display: -webkit-box;
+    margin: 0 auto;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 5;
+  }
+
+  @media (max-width: 620px) {
     width: 100%;
   }
 `

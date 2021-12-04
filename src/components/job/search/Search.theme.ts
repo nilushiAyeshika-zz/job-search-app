@@ -33,7 +33,7 @@ export const SearchWrapper = styled.div`
     font-style: italic;
   }
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     .search__innerWrapper {
       flex-direction: column;
     }
@@ -52,7 +52,7 @@ export const SearchWrapper = styled.div`
     }
   }
 
-  @media(max-width: 620px) {
+  @media (max-width: 620px) {
     form {
       width: 100%;
     }

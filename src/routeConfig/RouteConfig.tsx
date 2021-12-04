@@ -8,10 +8,7 @@ const RouteConfig = () => {
   return (
     <Routes>
       <Route path="/" element={<SearchJobScreen />} />
-      <Route
-        path={`${RouteHelper.JOB_DESCRIPTION_PATH}/:jobId`}
-        element={<ViewJobScreen />}
-      />
+      <Route path={`${RouteHelper.JOB_DESCRIPTION_PATH}/:jobId`} element={<ViewJobScreen />} />
     </Routes>
   )
 }

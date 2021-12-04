@@ -65,13 +65,13 @@ const ViewJobWrapper = styled.div`
     }
   }
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     .viewJob__Inner {
       width: 100%;
     }
   }
 
-  @media(max-width: 580px) {
+  @media (max-width: 580px) {
     .job__header {
       flex-direction: column;
     }
@@ -85,7 +85,7 @@ const ViewJobWrapper = styled.div`
     }
 
     .viewJob__Inner {
-      padding: 10rem 3rem 5rem 3rem
+      padding: 10rem 3rem 5rem 3rem;
     }
 
     .job__description {

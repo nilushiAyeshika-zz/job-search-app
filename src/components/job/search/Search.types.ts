@@ -5,5 +5,5 @@ export interface ISearchProps {
 
 export interface ISearchFormValues {
   location: string
-  job: string
+  queryString: string
 }

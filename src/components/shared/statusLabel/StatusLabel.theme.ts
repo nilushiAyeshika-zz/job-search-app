@@ -4,7 +4,7 @@ import { appTheme } from '../../../theme/Theme'
 
 const StatusLabelWrapper = styled.div`
   display: flex;
-  
+
   .card__applied {
     border: 1px solid ${appTheme.colors.TYPOGRAPHY_MIDDLE_LIGHT};
     display: flex;

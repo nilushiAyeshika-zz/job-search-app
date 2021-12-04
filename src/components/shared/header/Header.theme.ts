@@ -26,7 +26,15 @@ const HeaderWrapper = styled.div`
   }
 
   .header__gradient {
-    background: rgba(255, 255, 255, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 10%, rgba(255, 255, 255, .1) 40%, rgba(255, 255, 255, .5) 75%, rgba(255, 255, 255, 1) 100%) repeat scroll 0 0;
+    background: rgba(255, 255, 255, 0)
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 10%,
+        rgba(255, 255, 255, 0.1) 40%,
+        rgba(255, 255, 255, 0.5) 75%,
+        rgba(255, 255, 255, 1) 100%
+      )
+      repeat scroll 0 0;
     position: absolute;
     bottom: 0;
     left: 0;
